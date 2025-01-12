@@ -1,7 +1,6 @@
 # HTML专题之DOCTYPE
 
 
-
 ## 前言
 
 >  石匠敲击石头的第 1 次
@@ -38,8 +37,8 @@ DOCTYPE 翻译成中文的话表示 **“文档类型”**，在一个 HTML 网�
 
 不过一开始的 DOCTYPE 声明并非是现在这样的 `<!DOCTYPE html>` 声明，在 HTML5 版本之前的 HTML 是定义为基于 SGML 的语言，需要对 DTD 进行引用，才能告诉浏览器使用什么渲染模式，浏览器通常支持三种渲染模式：
 
-- **标准模式（Standards mode）：**根据 W3C 组织制定的 Web 标准来渲染页面
-- **怪异模式（Quirks mode）：**又称混杂模式，兼容模式，按浏览器厂商自己的方式来渲染页面，通常用于模拟老式浏览器来兼容老站点
+- **标准模式（Standards mode）：** 根据 W3C 组织制定的 Web 标准来渲染页面
+- **怪异模式（Quirks mode）：** 又称混杂模式，兼容模式，按浏览器厂商自己的方式来渲染页面，通常用于模拟老式浏览器来兼容老站点
 - **准标准模式（Almost standards mode）：** 接近于标准模式，但却具有少量怪异的特性
 
 
@@ -191,6 +190,3 @@ alert(document.compatMode);
 - https://juejin.cn/post/7031741176713576485
 - https://juejin.cn/post/6844904180943945742
 - https://juejin.cn/post/7323271640996691977
-
-
-

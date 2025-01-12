@@ -187,6 +187,7 @@ alert(document.compatMode);
 - https://html.spec.whatwg.org/multipage/syntax.html#the-doctype
 - https://developer.mozilla.org/zh-CN/docs/Glossary/Doctype
 - https://developer.mozilla.org/zh-CN/docs/Web/HTML/Quirks_Mode_and_Standards_Mode
+- https://www.freecodecamp.org/chinese/news/what-is-the-doctype-declaration-in-html
 - https://juejin.cn/post/7031741176713576485
 - https://juejin.cn/post/6844904180943945742
 - https://juejin.cn/post/7323271640996691977

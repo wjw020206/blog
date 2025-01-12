@@ -176,7 +176,7 @@ alert(document.compatMode);
 
 ## 总结
 
-- `<!DOCTYPE html>` 是用于声明文档类型，告诉浏览器的用标准模式渲染网页
+- `<!DOCTYPE html>` 是用于声明文档类型，告诉浏览器用标准模式渲染网页
 - HTML5 因为不再基于 SGML，因此不需要对 DTD 进行引用，使用最简单的声明方式
 
 

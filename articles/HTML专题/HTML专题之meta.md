@@ -422,3 +422,4 @@ Content-Type: text/html; charset=UTF-8
 - [meta标签的作用及整理](https://juejin.cn/post/6844904083296370702)
 - [浅谈之 - HTML 的 meta 标签有多少种](https://kebingzao.com/2020/09/04/meta/)
 - [\<meta\>：元数据元素](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta)
+- [巧用 meta 标签，设置 referrer 解决 403 Forbidden 问题](https://juejin.cn/post/7388072384349650959)

@@ -183,11 +183,11 @@ alert(document.compatMode);
 
 ## 参考文章
 
-- https://www.w3.org/QA/Tips/Doctype
-- https://html.spec.whatwg.org/multipage/syntax.html#the-doctype
-- https://developer.mozilla.org/zh-CN/docs/Glossary/Doctype
-- https://developer.mozilla.org/zh-CN/docs/Web/HTML/Quirks_Mode_and_Standards_Mode
-- https://www.freecodecamp.org/chinese/news/what-is-the-doctype-declaration-in-html
-- https://juejin.cn/post/7031741176713576485
-- https://juejin.cn/post/6844904180943945742
-- https://juejin.cn/post/7323271640996691977
+- [Don't forget to add a doctype - Quality Web Tips](https://www.w3.org/QA/Tips/Doctype)
+- [HTML Standard](https://html.spec.whatwg.org/multipage/syntax.html#the-doctype)
+- [文档类型声明 - MDN Web 文档术语表：Web 相关术语的定义 | MDN](https://developer.mozilla.org/zh-CN/docs/Glossary/Doctype)
+- [怪异模式和标准模式 - HTML（超文本标记语言） | MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Quirks_Mode_and_Standards_Mode)
+- [HTML 中的 DOCTYPE 声明是什么？](https://www.freecodecamp.org/chinese/news/what-is-the-doctype-declaration-in-html)
+- [浏览器与兼容性兼容性产生原因： 因为不同浏览器使用内核及所支持的HTML等网页语言标准不同；以及用户客户端的环境不同（如 - 掘金](https://juejin.cn/post/7031741176713576485)
+- [html篇--这可能是目前较为全面的html面试知识点了吧也不知道有没有跟小编有同感的童鞋，随着技术的逐(ri)渐(yi - 掘金](https://juejin.cn/post/6844904180943945742)
+- [DOCTYPE是什么，有何作用、 使用方式、渲染模式、严格模式和怪异模式的区别？DOCTYPE是HTML5的文档声明，通 - 掘金](https://juejin.cn/post/7323271640996691977)

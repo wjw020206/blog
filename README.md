@@ -6,7 +6,7 @@
 3. [HTML专题之语义化](https://github.com/wjw020206/Blog/issues/3)
 
 ## CSS专题
-1. CSS专题之样式优先级
+1. [CSS专题之层叠](https://github.com/wjw020206/blog/issues/4)
 2. CSS专题之盒模型
 3. CSS专题之BFC
 4. CSS专题之px、em、rem

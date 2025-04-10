@@ -46,6 +46,7 @@ BFC 的全称为**块格式化上下文（Block Formatting Context）**，是页
 3. 计算 BFC 区域高度时，浮动元素也参与计算
 4. BFC 区域不会与浮动元素重叠
 5. 块级元素在 BFC 中，其左外边距（`margin-left`）始终贴紧包含块的左边（即父元素的 content 区域左侧），**不会自动避开左浮动元素**，除非自身也创建 BFC
+6.  BFC 是独立渲染区域，不受外界影响（内部也不受外部影响）
 
 
 
@@ -95,13 +96,117 @@ BFC 的全称为**块格式化上下文（Block Formatting Context）**，是页
 ```html
 <div class="container">
   <div class="box1"></div>
-  <div style="overflow: hidden;"> <!-- 创建一个新的BFC区域 -->
+
+  <!-- 创建一个新的BFC区域 -->
+  <div style="overflow: hidden;"> 
     <div class="box2"></div>
   </div>
 </div>
 ```
 
 ![image-20250409154003954](images/image-20250409154003954.png)
+
+
+
+### 3. 计算 BFC 区域高度时，浮动元素也参与计算
+
+默认情况下，浮动元素会脱离标准文档流，不会被父元素的高度计算在内，导致父元素的高度塌陷，例如下面的例子。
+
+```css
+.box {
+  background-color: rgb(224, 206, 247);
+  border: 5px solid rebeccapurple;
+}
+
+.float {
+  float: left;
+  width: 200px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid black;
+  padding: 10px;
+}
+```
+
+```html
+<div class="box">
+  <div class="float">我是浮动的盒子！</div>
+  <p>我是容器内的内容。</p>
+</div>
+```
+
+![image-20250410081004823](images/image-20250410081004823.png)
+
+如果想要容器 `box` 的高度不塌陷，可以为它添加创建一个 BFC 区域。
+
+```css
+<div class="box" style="overflow: hidden;">
+  <div class="float">我是浮动的盒子！</div>
+  <p>我是容器内的内容。</p>
+</div>
+```
+
+![image-20250410081306812](images/image-20250410081306812.png)
+
+
+
+### 4. BFC 区域不会与浮动元素重叠
+
+例如在开发中经常遇到这样的媒体对象（左边是图片，右边是文字），例如下面的例子。
+
+```css
+.media {
+  width: calc(50% - 1.5em);
+  padding: 1.5em;
+  background-color: #eee;
+  border-radius: 0.5em;
+}
+
+.media-image {
+  float: left;
+  margin-right: 1.5em;
+}
+
+.media-body h4 {
+  margin-top: 0;
+}
+```
+
+```html
+<div class="media">
+  <img class="media-image" src="shoes.png" />
+  <div class="media-body">
+    <h4>Cadence</h4>
+    <p>
+      Check your stride turnover. The most efficient runners take about 180
+      steps per minute.
+    </p>
+  </div>
+</div>
+```
+
+![image-20250410082718546](images/image-20250410082718546.png)
+
+上述例子中因为左侧图片是左浮动的，导致右侧区域被图片遮挡，并且出现了文字环绕图片的效果，**如果不想图片遮挡右侧区域，可以为右侧区域创建一个 BFC**
+
+```html
+<div class="media">
+  <img class="media-image" src="shoes.png" />
+  
+  <!-- 创建了一个 BFC 区域 -->
+  <div class="media-body" style="overflow: hidden">
+    <h4>Cadence</h4>
+    <p>
+      Check your stride turnover. The most efficient runners take about 180
+      steps per minute.
+    </p>
+  </div>
+</div>
+```
+
+![image-20250410083223117](images/image-20250410083223117.png)
+
+**⚠️ 注意：** 此处也用到了 BFC 规则中的第六点规则：*BFC 是独立渲染区域，不受外界影响（内部也不受外部影响）*，在本例子中，**体现在右侧区域内的文字不会被左侧浮动图片所影响（文字环绕图片效果）**
 
 
 

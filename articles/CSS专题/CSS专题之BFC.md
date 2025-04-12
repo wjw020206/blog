@@ -45,7 +45,7 @@ BFC 的全称为**块格式化上下文（Block Formatting Context）**，是页
 2. 在**同一个 BFC 区域中**的相邻块级元素的垂直 `margin` 会重叠
 3. 计算 BFC 区域高度时，浮动元素也参与计算
 4. BFC 区域不会与浮动元素重叠
-5. 块级元素在 BFC 中，其左外边距（`margin-left`）始终贴紧包含块的左边（即父元素的 content 区域左侧），**不会自动避开左浮动元素**，除非自身也创建 BFC
+5. **未创建 BFC 的块级元素**，其左外边距（`margin-left`）始终贴紧包含块的左侧（即父元素的 content 区域左侧），**不会自动避开左浮动元素**，若该将该元素自身创建 BFC，则会避开左浮动元素，左外边距从浮动元素的右侧开始计算
 6.  BFC 是独立渲染区域，不受外界影响（内部也不受外部影响）
 
 
@@ -210,7 +210,7 @@ BFC 的全称为**块格式化上下文（Block Formatting Context）**，是页
 
 
 
-### 5. 块级元素在 BFC 中，其左外边距（`margin-left`）始终贴紧包含块的左边（即父元素的 content 区域左侧），**不会自动避开左浮动元素**，除非自身也创建 BFC
+### 5. **未创建 BFC 的块级元素**，其左外边距（`margin-left`）始终贴紧包含块的左侧（即父元素的 content 区域左侧），不会自动避开左浮动元素，若为该元素自身创建 BFC，则会避开左浮动元素，左外边距从浮动元素的右侧开始计算
 
 例如下面这个例子
 
@@ -241,24 +241,22 @@ BFC 的全称为**块格式化上下文（Block Formatting Context）**，是页
 </div>
 ```
 
-![image-20250411075008229](images/image-20250411075008229.png)
+![image-20250412092046693](images/image-20250412092046693.png)
 
 普通块的 `margin-left: 20px;` 紧贴容器的左边，**不会避开浮动元素**。
 
-如果我们想要让它自动避开浮动元素，可以为普通块创建一个 BFC 区域。
+如果我们想要让它自动避开浮动元素，可以为该元素自身创建 BFC
 
 ```html
 <div class="container">
   <div class="float-box">浮动</div>
   
-  <!-- 创建了一个 BFC 区域 -->
-  <div style="overflow: hidden;">
-    <div class="normal-box">普通块</div>
-  </div>
+  <!-- 为元素自身创建 BFC -->
+  <div class="normal-box" style="overflow: hidden;">普通块</div>
 </div>
 ```
 
-![image-20250411075401940](images/image-20250411075401940.png)
+![image-20250412091946542](images/image-20250412091946542.png)
 
 
 

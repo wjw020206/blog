@@ -55,11 +55,10 @@
 响应式设计大致有以下几个原则：
 
 1. **流式布局（Fluid Grid Layout）**
-
    - 使用相对单位而非固定单位
-
+   
    - 内容会根据屏幕大小自动伸缩
-
+   
 2. **媒体查询（Media Queries）**
    - 根据不同屏幕尺寸加载不同的样式
 
@@ -73,3 +72,26 @@
 
 ## 响应式设计 vs 自适应设计
 
+说到响应式设计，那就不能不提自适应设计，响应式设计是 Responsive Web Design（RWD），但自适应设计是 Adaptive Web Design（AWD）。对于这两者概念，网上很多文章都混淆不清，包括我自己一开始也是分不清楚这两者的区别。
+
+
+
+**RWD**
+
+这个概念最早是由 Ethan Marcotte 在 2010 年提出的，被大家公认为是 RWD 的起源。他提出的 RWD 方案是通过 HTML 和 CSS 的媒体查询技术，配合流式布局实现。**RWD 更偏向于只改变元素的外观布局，不会大幅度改变内容**，例如：[稀土掘金](https://juejin.cn/)，无论在大屏幕还是小屏幕设备上返回的内容都是一样的，只是布局发生了变化。
+
+
+
+**AWD**
+
+Adaptive Web Design 最早出自 Aaron Gustafson 于 2011 年出版的[书](https://adaptivewebdesign.info/)的标题。他认为 AWD 在包括 RWD 的 CSS 媒体查询技术基础之上，也要用 JavaScript 来操作 HTML 来更适应移动设备的能力，所以通常认为，**RWD 是 AWD 的子集**。
+
+![image-20250419130216719](images/image-20250419130216719.png)
+
+AWD 有可能会针对移动端用户**简化内容和功能**。AWD 可以在服务器端根据用户代理（UA）类型选择布局和大小合适的页面，为不同设备提供**不同版本**的网站，例如：[bilibili](https://www.bilibili.com/)，在大屏幕设备上返回 `www.bilibili.com`，但在小屏幕设备上会将 `www.bilibili.com` 重新定向为 `m.bilibili.com`，页面内容更加的精简。
+
+**相同点：** RWD 和 AWD 都是为了适配各种不同的移动设备，提升用户体验的技术。
+
+**不同点：** 借用 chokcoco 前辈这篇[文章](https://github.com/chokcoco/cnblogsArticle/issues/25)中的图来说明再合适不过了。
+
+![image-20250419130814327](images/image-20250419130814327.png)

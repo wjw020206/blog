@@ -364,3 +364,34 @@ AWD 有可能会针对移动端用户**简化内容和功能**。AWD 可以在�
 3. **功能有限：** 不支持复杂的网格场景，不能很方便地对齐行列。
 
 **更加推荐使用更现代的布局方式（如 Flex 和 Grid）**。
+
+
+
+### Flexbox
+
+我们也可以使用 Flexbox 布局结合栅格系统和媒体查询来重写前面的案例，代码会比前面的简化很多，完整的代码如下。
+
+<iframe height="300" style="width: 100%;" scrolling="no" title="Flexbox响应式布局" src="https://codepen.io/wjw020206/embed/bNNeKaw?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/wjw020206/pen/bNNeKaw">
+  Flexbox响应式布局</a> by CodePencil (<a href="https://codepen.io/wjw020206">@wjw020206</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+Flexbox 布局除了可以结合栅格系统和媒体查询外，它自身就解决了流动布局、弹性布局、排列方式等多个问题，并且代码更加简洁和易维护。
+
+例如要让一个元素水平垂直居中，使用以下代码最为简便。
+
+```css
+.container {
+  display: flex;
+}
+
+.item {
+  margin: auto;
+}
+```
+
+
+
+### Grid layout
+

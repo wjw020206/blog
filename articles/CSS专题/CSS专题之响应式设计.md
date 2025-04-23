@@ -367,9 +367,9 @@ AWD 有可能会针对移动端用户**简化内容和功能**。AWD 可以在�
 
 
 
-### Flexbox
+### Flexbox layout
 
-我们也可以使用 Flexbox 布局结合栅格系统和媒体查询来重写前面的案例，代码会比前面的简化很多，完整的代码如下。
+**弹性盒子布局（Flexbox）**相信大家平常开发中使用的最多，我们使用弹性盒子布局结合栅格系统和媒体查询来重写前面的案例，代码会比前面的简化很多，完整的代码如下：
 
 <iframe height="300" style="width: 100%;" scrolling="no" title="Flexbox响应式布局" src="https://codepen.io/wjw020206/embed/bNNeKaw?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href="https://codepen.io/wjw020206/pen/bNNeKaw">
@@ -377,7 +377,7 @@ AWD 有可能会针对移动端用户**简化内容和功能**。AWD 可以在�
   on <a href="https://codepen.io">CodePen</a>.
 </iframe>
 
-Flexbox 布局除了可以结合栅格系统和媒体查询外，它自身就解决了流动布局、弹性布局、排列方式等多个问题，并且代码更加简洁和易维护。
+弹性盒子布局除了可以结合栅格系统和媒体查询外，它自身就解决了流动布局、弹性布局、排列方式等多个问题，并且代码更加简洁和易维护。
 
 例如要让一个元素水平垂直居中，使用以下代码最为简便。
 
@@ -393,5 +393,22 @@ Flexbox 布局除了可以结合栅格系统和媒体查询外，它自身就解
 
 
 
-### Grid layout
+### Grid Layout
 
+说到响应式设计，不能不提到目前为止最强大的布局，**网格布局（Grid Layout）**。
+
+- Flexbox 是一维布局，只能在一条直线上放置内容元素
+
+  ![image-20250423082812522](images/image-20250423082812522.png)
+
+- Grid Layout 则是二维布局，可以灵活的控制水平和垂直方向内容元素的布局
+
+  ![image-20250423082916982](images/image-20250423082916982.png)
+
+我们使用 Grid Layout 重写前面的例子，代码会比 Flexbox layout 版本的更加简便。完整的代码如下：
+
+<iframe height="300" style="width: 100%;" scrolling="no" title="Grid 栅格布局" src="https://codepen.io/wjw020206/embed/EaagLxa?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/wjw020206/pen/EaagLxa">
+  Grid 栅格布局</a> by CodePencil (<a href="https://codepen.io/wjw020206">@wjw020206</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>

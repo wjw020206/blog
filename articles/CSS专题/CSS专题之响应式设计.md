@@ -1,4 +1,4 @@
-# CSS专题之响应式设计
+# CSS专题之响应式设计（上）
 
 
 
@@ -412,3 +412,21 @@ AWD 有可能会针对移动端用户**简化内容和功能**。AWD 可以在�
   Grid 栅格布局</a> by CodePencil (<a href="https://codepen.io/wjw020206">@wjw020206</a>)
   on <a href="https://codepen.io">CodePen</a>.
 </iframe>
+
+
+## 总结
+
+本文主要介绍了响应式设计的相关概念以及各种**布局实现方式**，包括传统的浮动+百分比布局、现代的 Flexbox 和 CSS Grid，并结合媒体查询构建了基础的栅格系统。
+
+但响应式的设计不仅仅是根据设备显示合适的排版，还有**移动端适配、资源的适配（如图片、字体）也同样重要**，但由于全写一起篇幅过长，所以打算放到下一篇文章中写。
+
+
+
+## 参考文章
+
+- [前端响应式布局原理与方案（详细版）响应式布局指的是同一页面在不同屏幕尺寸下有不同的布局。传统的开发方式是PC端开发一套， - 掘金](https://juejin.cn/post/6844903814332432397)
+
+- [前端基础知识概述 -- 移动端开发的屏幕、图像、字体与布局的兼容适配](https://github.com/chokcoco/cnblogsArticle/issues/25)
+- [响应式设计 VS 自适应设计现在，移动设备普遍，用户量远超桌面设备，很多用户使用移动设备（手机、平板等）浏览网站。于是， - 掘金](https://juejin.cn/post/6868105073868668936)
+- [The 100% correct way to do CSS breakpoints | by David Gilbertson | We’ve moved to freeCodeCamp.org/news | Medium](https://medium.com/free-code-camp/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862)
+- [自适应网页设计（Responsive Web Design） - 阮一峰的网络日志](https://www.ruanyifeng.com/blog/2012/05/responsive_web_design.html)

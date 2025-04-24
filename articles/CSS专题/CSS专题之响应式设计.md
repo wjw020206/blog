@@ -292,11 +292,8 @@ AWD 有可能会针对移动端用户**简化内容和功能**。AWD 可以在�
 
 定义好了栅格系统，我们接下来就要为元素添加相关的样式，这里因为我们要做的页面是类似后台管理的布局，所以**使用 PC 优先策略**，使用百分比布局完成大屏幕下完整的布局。
 
-<iframe height="300" style="width: 100%;" scrolling="no" title="基础布局示例" src="https://codepen.io/wjw020206/embed/GggoemQ?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href="https://codepen.io/wjw020206/pen/GggoemQ">
-  基础布局示例</a> by CodePencil (<a href="https://codepen.io/wjw020206">@wjw020206</a>)
-  on <a href="https://codepen.io">CodePen</a>.
-</iframe>
+[在线代码演示](https://codepen.io/wjw020206/pen/GggoemQ)
+
 
 
 **如何确定媒体查询的断点**
@@ -348,13 +345,8 @@ AWD 有可能会针对移动端用户**简化内容和功能**。AWD 可以在�
 }
 ```
 
-最终的代码如下：
+[在线代码演示](https://codepen.io/wjw020206/pen/bNNdZPV)
 
-<iframe height="300" style="width: 100%;" scrolling="no" title="百分比响应式布局" src="https://codepen.io/wjw020206/embed/bNNdZPV?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href="https://codepen.io/wjw020206/pen/bNNdZPV">
-  百分比响应式布局</a> by CodePencil (<a href="https://codepen.io/wjw020206">@wjw020206</a>)
-  on <a href="https://codepen.io">CodePen</a>.
-</iframe>
 
 
 **百分比布局缺点：**
@@ -369,13 +361,10 @@ AWD 有可能会针对移动端用户**简化内容和功能**。AWD 可以在�
 
 ### Flexbox layout
 
-**弹性盒子布局（Flexbox）**相信大家平常开发中使用的最多，我们使用弹性盒子布局结合栅格系统和媒体查询来重写前面的案例，代码会比前面的简化很多，完整的代码如下：
+**弹性盒子布局（Flexbox）**相信大家平常开发中使用的最多，我们使用弹性盒子布局结合栅格系统和媒体查询来重写前面的案例，代码会比前面的简化很多。
 
-<iframe height="300" style="width: 100%;" scrolling="no" title="Flexbox响应式布局" src="https://codepen.io/wjw020206/embed/bNNeKaw?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href="https://codepen.io/wjw020206/pen/bNNeKaw">
-  Flexbox响应式布局</a> by CodePencil (<a href="https://codepen.io/wjw020206">@wjw020206</a>)
-  on <a href="https://codepen.io">CodePen</a>.
-</iframe>
+[在线代码演示](https://codepen.io/wjw020206/pen/bNNeKaw)
+
 
 弹性盒子布局除了可以结合栅格系统和媒体查询外，它自身就解决了流动布局、弹性布局、排列方式等多个问题，并且代码更加简洁和易维护。
 
@@ -405,13 +394,8 @@ AWD 有可能会针对移动端用户**简化内容和功能**。AWD 可以在�
 
   ![image-20250423082916982](images/image-20250423082916982.png)
 
-我们使用 Grid Layout 重写前面的例子，代码会比 Flexbox layout 版本的更加简便。完整的代码如下：
+我们使用 Grid Layout 重写前面的例子，代码会比 Flexbox layout 版本的更加简便，[在线代码演示](https://codepen.io/wjw020206/pen/EaagLxa)。
 
-<iframe height="300" style="width: 100%;" scrolling="no" title="Grid 栅格布局" src="https://codepen.io/wjw020206/embed/EaagLxa?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href="https://codepen.io/wjw020206/pen/EaagLxa">
-  Grid 栅格布局</a> by CodePencil (<a href="https://codepen.io/wjw020206">@wjw020206</a>)
-  on <a href="https://codepen.io">CodePen</a>.
-</iframe>
 
 
 ## 总结

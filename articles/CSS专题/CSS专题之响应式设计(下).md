@@ -302,7 +302,7 @@ PPI 的计算公式如下：
 
 - 元素大小为 `196 X 126`，通过以下计算来转换为 `vw` 单位
 
-  - 宽度：`196 / 375 = 52.26vw`
+  - 宽度：`196 / 375 = 52.2667vw`
   - 高度：`126 / 375 = 33.6vw`
   - 其他如 `margin`、`padding`、`left` 等也可以用同样的方式换算为 `vw`
 
@@ -318,13 +318,31 @@ PPI 的计算公式如下：
 
    ![image-20250504184308286](images/image-20250504184308286.png)
 
-2. 使用 CSS 预处理器，如：Scss、Less、或者 PostCSS
+2. **使用 CSS 预处理器**，如：Scss 或者 Less
 
-   ```scss
-   // 假设设计稿的宽度是 375px，假设取设计稿宽度下 1rem = 37.5px
-   $baseFontSize: 37.5;
-   
-   @function px2rem($px) {
-   	@return $px / $baseFontSize * 1rem;
-   }
-   ```
+   - `rem` 方案
+
+     ```scss
+     // 假设设计稿的宽度是 375px，假设取设计稿宽度下 1rem = 37.5px （375px 平分为 10 份）
+     $baseFontSize: 37.5;
+     
+     @function px2rem($px) {
+     	@return $px / $baseFontSize * 1rem;
+     }
+     ```
+
+   - `vw` 方案
+
+     ```scss
+     // 假设设计稿的宽度是 375px
+     $baseWidth: 375;
+     
+     @function px2vw($px) {
+     	@return $px / $baseWidth * 100vw;
+     }
+     ```
+
+3.  **使用 PostCSS 插件（推荐）**
+
+   - [postcss-pxtorem](https://github.com/cuth/postcss-pxtorem) 插件：会自动将 CSS 文件中的转换为 `px` 单位转换为 `rem` 单位
+   - [postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport) 插件：会自动将 CSS 文件中的转换为 `px` 单位转换为 `vw` 单位

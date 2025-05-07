@@ -286,6 +286,28 @@ PPI 的计算公式如下：
 
 ### vw
 
+严格来说，使用 `rem` 适配移动端页面是一种 **hack 手段**，因为 `rem` 单位的初衷不是用来进行移动端布局的，就连 [flexible](https://github.com/amfe/lib-flexible) 这个曾经非常流行的适配方案，在它的首页也明确表示**该方案已不再推荐使用，官方建议采用基于 `vw` 的新方案**。
+
+![image-20250507074211273](images/image-20250507074211273.png)
+
+使用 `rem` 适配的方案是不错，但是需要依赖 JavaScript 动态修改根元素的 `font-size`，而 `vw/vh（vmax/vmin）` 的出现很好的弥补了需要 JavaScript 辅助的缺点。
+
+**`1vw` 等于 `window.innerWidth` 的数值的 `1%`**
+
+**`1vh` 等于`window.innerHeight` 的数值的 `1%`**
+
+还是以前面的设计稿为例：
+
+- 设计稿宽度为 `375`
+
+- 元素大小为 `196 X 126`，通过以下计算来转换为 `vw` 单位
+
+  - 宽度：`196 / 375 = 52.26vw`
+  - 高度：`126 / 375 = 33.6vw`
+  - 其他如 `margin`、`padding`、`left` 等也可以用同样的方式换算为 `vw`
+
+[在线预览效果](https://codepen.io/wjw020206/pen/qEEKXEL)
+
 
 
 ## 简化计算

@@ -472,7 +472,7 @@ font-family: Blanco, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Rob
 
 **-apple-system / BlinkMacSystemFont**
 
-我们发现这两个字体族没有在最新的标准里出现，这是因为 `system-ui` 是新的 CSS 规范 [CSS Fonts Module Level 4](https://www.w3.org/TR/css-fonts-4/#generic-font-families) 新增的，但是不是所有平台都支持，例如在 [system-ui value for font-family | Can I use](https://caniuse.com/font-family-system-ui) 就有描述，**在 macOS 和 iOS 上，我们需要使用 `-apple-system` 及 `BlinkMacSystemFont` 来兼容适配 `system-ui` 标准。**
+我们发现这两个字体族没有在最新的标准里出现，这是因为 `system-ui` 是新的 CSS 规范 [CSS Fonts Module Level 4](https://www.w3.org/TR/css-fonts-4/#generic-font-families) 新增的，但不是所有平台都支持，例如在 [system-ui value for font-family | Can I use](https://caniuse.com/font-family-system-ui) 就有描述，**在 macOS 和 iOS 上，我们需要使用 `-apple-system` 及 `BlinkMacSystemFont` 来兼容适配 `system-ui` 标准。**
 
 ![image-20250508091334704](images/image-20250508091334704.png)
 
@@ -498,6 +498,86 @@ font-family: Blanco, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Rob
 10. **Apple Color Emoji**：macOS/iOS 上的原生彩色 emoji 字体
 11. **Segoe UI Emoji**：Windows 上的 emoji 字体
 12. **Segoe UI Symbol**：Windows 上的符号字体，含部分 emoji 和图形字符
+
+
+
+### 1px 问题与解决方案
+
+`1px` 问题是前端开发中经常遇到、也常出现在面试中的一个细节问题。在移动设备上，尤其是 Retina 屏（即设备像素比 DPR > 1）中，设计稿中标注的 `1px` 细线，**在真实页面中会显得比预期更粗，影响视觉精度**。
+
+
+
+**问题原因**
+
+以一台 **DPR = 2** 的设备为例：
+
+- 设计稿中的 `1px` 是**物理像素**
+- 而 CSS 中写的 `1px` 是**设备独立像素（CSS 像素）**
+- 在 DPR 为 2 的设备中，`1 设备独立像素 = 2 × 2 = 4 个物理像素`
+- 所以就导致在 CSS 中写的 `border: 1px solid`，浏览器会用 **2 条物理像素宽的线来渲染它**
+
+
+
+**解决方案**
+
+我们可以通过 CSS 的媒体查询来为高 DPR 的屏幕单独调整边框粗细。
+
+```css
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+  /* 调整边框粗细 */
+}
+```
+
+**⚠️ 注意：**  基于分辨率的媒体查询因为比较新，浏览器支持得不好，在部分老的浏览器（比如 IE9~11 和 Opera Mini ）不支持 `dppx` 单位，所以使用  `dpi`（每英寸的像素点数）单位代替（比如用 `192dpi` 代替 `2dppx`）
+
+`dpi` 是 **物理单位**，指每英寸包含的物理像素点数量，CSS 中的 `1in`（英寸）= `96px`（设备独立像素）
+
+- `96dpi` ≈ **DPR = 1** = `1dppx`
+- `192dpi` ≈ **DPR = 2** = `2dppx`
+- `288dpi` ≈ **DPR = 3** = `3dppx`
+
+
+
+或者也可以通过 JavaScript 的 `window.devicePixelRatio` 来获取当前屏幕的 DPR，并动态调整边框粗细。
+
+```js
+if (window.devicePixelRatio && window.devicePixelRatio > 1) {
+  /* 调整边框粗细 */
+}
+```
+
+
+
+可能会有人想到使用如下方式解决高 DPR 屏幕下边框粗细的问题。
+
+```css
+border: 1px solid;
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+  border: 0.5px solid; /* DPR = 2 时使用 0.5 CSS 像素的边框 */
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 3), only screen and (min-resolution: 288dpi) {
+  border: 0.33px solid; /* DPR = 3 时使用 0.33 CSS 像素的边框 */
+}
+```
+
+**⚠️ 注意：** 这个方式在现代浏览器中（比如新版本的 Safari、Chrome）是可行的，**但在 iOS 7 以下或部分 Android 浏览器中，小于 `1px` 的单位会被当作 `0px` 处理，所以不推荐使用这种方式**。
+
+
+
+下面推荐四种实际可行的方式
+
+- **使用渐变实现（最推荐，兼容好）**
+
+  ```css
+  ```
+
+  
+
+
+
+
 
 
 

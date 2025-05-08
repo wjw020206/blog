@@ -418,6 +418,89 @@ PPI 的计算公式如下：
 
 
 
+### 字体适配及优化
+
+**字体大小**
+
+浏览器有最小字体的限制：
+
+- 在 PC 上最小 `font-size: 12px`
+- 在手机上最小 `font-size: 8px`
+
+**⚠️ 注意：** Chrome 118 版本后字体大小最小限制默认关闭了，支持小于 12px 的字体大小。
+
+
+
+**字体选择**
+
+Web 字体是拖慢网页加载时间的主要原因之一，仅次于图片资源。因此，我们**应尽可能使用用户设备上已有的字体，而不是额外下载字体文件**。
+
+使用系统字体不仅可以提升加载速度，还能与操作系统原生界面保持一致，从而获得更好的视觉统一性和用户体验。
+
+目前主流操作系统包括 Windows、macOS、iOS、Android、Linux 等。我们可以参考 [CSS-Tricks](https://css-tricks.com/) 网站使用的一段 `font-family` 配置，看看它是如何兼顾不同平台的：
+
+```css
+font-family: Blanco, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+```
+
+我们来分析下 `font-family` 属性的值类型，它主要可以设置两类字体：
+
+- **具体字体族名**：指定明确的字体名称，例如 `font-family: Microsoft YaHei;` 表示优先使用 “微软雅黑” 字体。
+
+- **通用字体族名**：用于作为最后的兜底字体，当前面指定的具体字体族都不可用时使用。在 [CSS Fonts Module Level 3](https://www.w3.org/TR/2018/REC-css-fonts-3-20180920/#generic-font-families) 规范中定义了如下几个通用字体族名：
+
+  - `serif`：衬线字体族（如 Times New Roman）
+  - `sans-serif`：无衬线字体族（如 Arial）
+  - `monospace`：等宽字体族（如 Courier New）
+  - `cursive`：草书或手写体（如 Comic Sans MS）
+  - `fantasy`：具有艺术装饰风格的字体（如 Papyrus）
+
+  新的 CSS 规范 [CSS Fonts Module Level 4](https://www.w3.org/TR/css-fonts-4/#generic-font-families) 中又新增了如下几个通用字体族名：
+
+  - `system-ui`：使用操作系统默认 UI 字体
+  - `emoji`：专门用于渲染 emoji 表情符号的字体
+  - `math`：用于数学符号或表达式的字体
+  - `fangsong`：针对中文仿宋体（仿宋_GB2312）设计，主要用于中文排版中的正式文档或书籍风格
+
+
+
+**system-ui**
+
+`font-family: system-ui;` 的目的就是为了在不同的操作系统中自动选择本操作系统下的默认系统字体，**非常推荐在日常开发中使用。**
+
+
+
+**-apple-system / BlinkMacSystemFont**
+
+我们发现这两个字体族没有在最新的标准里出现，这是因为 `system-ui` 是新的 CSS 规范 [CSS Fonts Module Level 4](https://www.w3.org/TR/css-fonts-4/#generic-font-families) 新增的，但是不是所有平台都支持，例如在 [system-ui value for font-family | Can I use](https://caniuse.com/font-family-system-ui) 就有描述，**在 macOS 和 iOS 上，我们需要使用 `-apple-system` 及 `BlinkMacSystemFont` 来兼容适配 `system-ui` 标准。**
+
+![image-20250508091334704](images/image-20250508091334704.png)
+
+
+
+**总结**
+
+知道了上面这些，我们大致上就可以看懂 [CSS-Tricks](https://css-tricks.com/) 网站的 `font-family` 配置
+
+```css
+font-family: Blanco, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+```
+
+1. **Blanco**：网站自定义品牌字体，优先加载显示
+2. **system-ui**：使用各支持平台上的默认系统字体
+3. **-apple-system**：用于兼容在旧版 macOS/iOS 浏览器上的 `system-ui`
+4. **BlinkMacSystemFont**：用于兼容在旧版 macOS/iOS 浏览器上的 `system-ui`
+5. **Segoe UI**：Windows 和 Windows Phone 上的系统默认字体
+6. **Roboto**：Android 及部分新版 Chrome OS 的系统默认字体
+7. **Helvetica**：低版本浏览器中的通用无衬线字体替代方案
+8. **Arial **：低版本浏览器中的通用无衬线字体替代方案
+9. **sans-serif**：最终兜底字体，确保至少使用无衬线风格
+10. **Apple Color Emoji**：macOS/iOS 上的原生彩色 emoji 字体
+11. **Segoe UI Emoji**：Windows 上的 emoji 字体
+12. **Segoe UI Symbol**：Windows 上的符号字体，含部分 emoji 和图形字符
+
+
+
 ## 简化计算
 
 在实际开发中，我们如果每次都手动将 `px` 转换为 `rem` 或者 `vm`，肯定会影响开发效率，有以下三种方式简化计算步骤：

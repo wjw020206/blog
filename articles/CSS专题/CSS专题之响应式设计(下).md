@@ -512,9 +512,28 @@ font-family: Blanco, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Rob
 以一台 **DPR = 2** 的设备为例：
 
 - 设计稿中的 `1px` 是**物理像素**
+
 - 而 CSS 中写的 `1px` 是**设备独立像素（CSS 像素）**
+
 - 在 DPR 为 2 的设备中，`1 设备独立像素 = 2 × 2 = 4 个物理像素`
-- 所以就导致在 CSS 中写的 `border: 1px solid`，浏览器会用 **2 条物理像素宽的线来渲染它**
+
+- 所以就导致在 CSS 中写的 `border-top: 1px solid red`，浏览器会用 **2 条物理像素宽的线来渲染它**
+
+例如下面这个例子：
+
+  ```html
+  <div class="box"></div>
+  ```
+
+  ```css
+  .box {
+    width: 50px;
+    height: 50px;
+    background: #ccc;
+    border-top: 1px solid red;
+  }
+  ```
+![image-20250508195834150](images/image-20250508195834150.png)
 
 
 
@@ -528,15 +547,13 @@ font-family: Blanco, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Rob
 }
 ```
 
-**⚠️ 注意：**  基于分辨率的媒体查询因为比较新，浏览器支持得不好，在部分老的浏览器（比如 IE9~11 和 Opera Mini ）不支持 `dppx` 单位，所以使用  `dpi`（每英寸的像素点数）单位代替（比如用 `192dpi` 代替 `2dppx`）
+**⚠️ 注意：** 基于分辨率的媒体查询因为比较新，浏览器支持得不好，在部分老的浏览器（比如 IE9~11 和 Opera Mini 等）不支持 `dppx` 单位，所以使用  `dpi`（每英寸的像素点数）单位代替（比如用 `192dpi` 代替 `2dppx`）
 
 `dpi` 是 **物理单位**，指每英寸包含的物理像素点数量，CSS 中的 `1in`（英寸）= `96px`（设备独立像素）
 
 - `96dpi` ≈ **DPR = 1** = `1dppx`
 - `192dpi` ≈ **DPR = 2** = `2dppx`
 - `288dpi` ≈ **DPR = 3** = `3dppx`
-
-
 
 或者也可以通过 JavaScript 的 `window.devicePixelRatio` 来获取当前屏幕的 DPR，并动态调整边框粗细。
 
@@ -551,14 +568,20 @@ if (window.devicePixelRatio && window.devicePixelRatio > 1) {
 可能会有人想到使用如下方式解决高 DPR 屏幕下边框粗细的问题。
 
 ```css
-border: 1px solid;
+.box {
+  border-top: 1px solid #999;
+}
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
-  border: 0.5px solid; /* DPR = 2 时使用 0.5 CSS 像素的边框 */
+  .box {
+    border-top: 0.5px solid #999; /* DPR = 2 时使用 0.5 CSS 像素的边框 */
+  }
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 3), only screen and (min-resolution: 288dpi) {
-  border: 0.33px solid; /* DPR = 3 时使用 0.33 CSS 像素的边框 */
+  .box {
+    border-top: 0.33px solid #999; /* DPR = 3 时使用 0.33 CSS 像素的边框 */
+  }
 }
 ```
 
@@ -570,14 +593,32 @@ border: 1px solid;
 
 - **使用渐变实现（最推荐，兼容好）**
 
-  ```css
+  ```html
+  <div class="box"></div>
   ```
-
   
-
-
-
-
+  ```css
+  .box {
+    width: 50px;
+    height: 50px;
+    background: #ccc;
+    border-top: 1px solid red;
+  }
+  
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (min-resolution: 192dpi) {
+    .box {
+      background-image: linear-gradient(to top, transparent 50%, red 50%);
+      background-size: 100% 1px;
+      background-repeat: no-repeat;
+      background-position: top center;
+      border-top: none;
+      padding-top: 1px;
+    }
+  }
+  ```
+  
+  ![image-20250508195926265](images/image-20250508195926265.png)
 
 
 

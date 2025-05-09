@@ -13,7 +13,7 @@
 5. [CSS专题之BFC](https://github.com/wjw020206/blog/issues/8)
 6. [CSS专题之CSS单位](https://github.com/wjw020206/blog/issues/9)
 7. [CSS专题之响应式设计(上)](https://github.com/wjw020206/blog/issues/10)
-8. CSS专题之响应式设计(下)
+8. [CSS专题之响应式设计(下)](https://github.com/wjw020206/blog/issues/11)
 9. CSS专题之自定义属性
 10. CSS专题之常见布局
 11. CSS专题之flex:1和height:0

@@ -855,3 +855,13 @@ if (window.devicePixelRatio && window.devicePixelRatio > 1) {
   - 使用缩放实现
   - 使用图片实现
   - 使用 SVG 实现
+
+
+
+## 参考文章
+
+- [前端基础知识概述 -- 移动端开发的屏幕、图像、字体与布局的兼容适配 · Issue #25 · chokcoco/cnblogsArticle](https://github.com/chokcoco/cnblogsArticle/issues/25)
+- [使用Flexible实现手淘H5页面的终端适配 - 前端开发者学堂 (fedev.cn) - 前端开发社区](https://fedev.cn/mobile/lib-flexible-for-html5-layout.html)
+- [超详细讲解H5移动端适配移动互联网发展至今，各种移动设备应运而生，但它们的物理分辨率可以说是五花八门，还不了解H5移动端 - 掘金](https://juejin.cn/post/7085931616136069156?searchId=202504280803533C31E001609097AF9274)
+- [谈谈 H5 移动端适配原理前言 H5 移动端 开发的必不可少的一个环节就是 移动端网页的适配，因为 UI 通常只会提供 - 掘金](https://juejin.cn/post/7266671630025031699)
+- [支持不同的像素密度  | Compatibility  | Android Developers](https://developer.android.com/training/multiscreen/screendensities?hl=zh_cn)

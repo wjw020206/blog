@@ -369,8 +369,8 @@ PPI 的计算公式如下：
   sizes="(min-width: 600px) 600px, 300px"
   src="img@1x.jpg"
   srcset="img@1x.jpg 300w,
-     			img@2x.jpg 600w,
-     			img@3x.jpg 1200w"
+          img@2x.jpg 600w,
+          img@3x.jpg 1200w"
 />
 ```
 
@@ -605,27 +605,25 @@ if (window.devicePixelRatio && window.devicePixelRatio > 1) {
     border-top: 1px solid red;
   }
   
-  @media only screen and (-webkit-min-device-pixel-ratio: 2),
-    only screen and (min-resolution: 192dpi) {
+  @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
     .box {
       /* 使用线性渐变生成一条视觉上的 1px 红色线：
-         从元素底部向顶部方向，前 50% 是透明的，后 50% 是红色 */
+      从元素底部向顶部方向，前 50% 是透明的，后 50% 是红色 */
       background-image: linear-gradient(to top, transparent 50%, red 50%);
-      
+  
       /* 设置背景图的尺寸为：宽度 100%（铺满元素），高度仅为 1px */
       background-size: 100% 1px;
       background-repeat: no-repeat;
       background-position: top center;
       /* 移除默认的 border-top，避免和渐变重复 */
       border-top: none;
-      
+  
       /* 添加 1px 顶部内边距，为那条背景模拟线提供显示空间（占位） */
       padding-top: 1px;
     }
   }
   
-  @media only screen and (-webkit-min-device-pixel-ratio: 3),
-    only screen and (min-resolution: 288dpi) {
+  @media only screen and (-webkit-min-device-pixel-ratio: 3), only screen and (min-resolution: 288dpi) {
     .box {
       background-image: linear-gradient(to top, transparent 66.66%, red 66.66%);
       background-size: 100% 1px;
@@ -649,15 +647,14 @@ if (window.devicePixelRatio && window.devicePixelRatio > 1) {
     border-top: 1px solid red;
   }
   
-  @media only screen and (-webkit-min-device-pixel-ratio: 2),
-    only screen and (min-resolution: 192dpi) {
+  @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
     .box {
       /* 设置元素为相对定位作为伪元素定位的基准 */
       position: relative;
-      
+  
       /* 隐藏原本的边框 */
       border-top: none;
-      
+  
       /* 添加 1px 顶部内边距，为定位的伪元素边框占位 */
       padding-top: 1px;
     }
@@ -670,7 +667,7 @@ if (window.devicePixelRatio && window.devicePixelRatio > 1) {
       /* 因为进行 0.5 倍缩放，所以宽度会缩小一半，故使用 200% 宽度 */
       width: 200%;
       border-top: 1px solid red;
-      
+  
       /* 对 1px 边框进行 0.5 倍缩放 */
       transform: scale(0.5);
       transform-origin: 0 0;
@@ -678,8 +675,7 @@ if (window.devicePixelRatio && window.devicePixelRatio > 1) {
     }
   }
   
-  @media only screen and (-webkit-min-device-pixel-ratio: 3),
-    only screen and (min-resolution: 288dpi) {
+  @media only screen and (-webkit-min-device-pixel-ratio: 3), only screen and (min-resolution: 288dpi) {
     .box {
       position: relative;
       border-top: none;
@@ -699,7 +695,7 @@ if (window.devicePixelRatio && window.devicePixelRatio > 1) {
     }
   }
   ```
-
+  
   
 
 - **使用图片实现（base64）**
@@ -730,28 +726,26 @@ if (window.devicePixelRatio && window.devicePixelRatio > 1) {
        border-top: 1px solid red;
      }
      
-     @media only screen and (-webkit-min-device-pixel-ratio: 2),
-       only screen and (min-resolution: 192dpi) {
+     @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
        .box {
          /* 添加 1px 顶部内边距，为背景图片边框占位 */
          padding-top: 1px;
-         
+     
          /* 隐藏原本的边框 */
          border-top: none;
          background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACAQMAAACjTyRkAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAAZQTFRF/wAAAAAAQaMSAwAAAAJ0Uk5T/wDltzBKAAAADElEQVR4nGNkYGwAAACKAIOERterAAAAAElFTkSuQmCC);
          background-position: 0 0;
-         
+     
          /* 设置背景图片 X 轴方向平铺 */
          background-repeat: repeat-x;
-         
+     
          /* 背景图片的显示尺寸缩放为 宽 1 像素、高 1 像素 */
          background-size: 1px 1px;
        }
      }
      ```
-
-     **⚠️ 注意：** 这种方法**无法动态修改边框的颜色**，不推荐使用。
-
+     
+**⚠️ 注意：** 这种方法**无法动态修改边框的颜色**，不推荐使用。
      
 
 - **使用 SVG 实现**
@@ -764,12 +758,11 @@ if (window.devicePixelRatio && window.devicePixelRatio > 1) {
     border-top: 1px solid red;
   }
   
-  @media only screen and (-webkit-min-device-pixel-ratio: 2),
-    only screen and (min-resolution: 192dpi) {
+  @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
     .box {
       /* 隐藏原本的边框 */
       border-top: none;
-      
+  
       /* 使用 url 引用 SVG，并设置 SVG 的高度为 0.5，并且 y 轴设置为 0.5 居中对齐*/
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='1'%3E%3Crect fill='red' x='0' y='0.5' width='100%25' height='0.5'/%3E%3C/svg%3E");
       background-position: 0 0;
@@ -777,8 +770,7 @@ if (window.devicePixelRatio && window.devicePixelRatio > 1) {
     }
   }
   
-  @media only screen and (-webkit-min-device-pixel-ratio: 3),
-    only screen and (min-resolution: 288dpi) {
+  @media only screen and (-webkit-min-device-pixel-ratio: 3), only screen and (min-resolution: 288dpi) {
     .box {
       border-top: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='1'%3E%3Crect fill='red' x='0' y='0.67' width='100%25' height='0.33'/%3E%3C/svg%3E");
@@ -787,7 +779,7 @@ if (window.devicePixelRatio && window.devicePixelRatio > 1) {
     }
   }
   ```
-
+  
   **⚠️ 注意：** 在 `background-image: url()` 中使用**未经编码的 SVG 字符串**很容易出错导致没效果，建议转码后使用。
 
 上述四种方法最终效果如下：
@@ -813,7 +805,7 @@ if (window.devicePixelRatio && window.devicePixelRatio > 1) {
      $baseFontSize: 37.5;
      
      @function px2rem($px) {
-     	@return $px / $baseFontSize * 1rem;
+       @return $px / $baseFontSize * 1rem;
      }
      ```
 
@@ -824,7 +816,7 @@ if (window.devicePixelRatio && window.devicePixelRatio > 1) {
      $baseWidth: 375;
      
      @function px2vw($px) {
-     	@return $px / $baseWidth * 100vw;
+       @return $px / $baseWidth * 100vw;
      }
      ```
 

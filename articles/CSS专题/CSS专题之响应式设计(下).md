@@ -533,7 +533,7 @@ font-family: Blanco, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Rob
     border-top: 1px solid red;
   }
   ```
-![image-20250508195834150](images/image-20250508195834150.png)
+![image-20250509073722260](images/image-20250509073722260.png)
 
 
 
@@ -591,7 +591,7 @@ if (window.devicePixelRatio && window.devicePixelRatio > 1) {
 
 下面推荐四种实际可行的方式
 
-- **使用渐变实现（最推荐，兼容好）**
+- **使用渐变实现**
 
   ```html
   <div class="box"></div>
@@ -608,7 +608,26 @@ if (window.devicePixelRatio && window.devicePixelRatio > 1) {
   @media only screen and (-webkit-min-device-pixel-ratio: 2),
     only screen and (min-resolution: 192dpi) {
     .box {
+      /* 使用线性渐变生成一条视觉上的 1px 红色线：
+         从元素底部向顶部方向，前 50% 是透明的，后 50% 是红色 */
       background-image: linear-gradient(to top, transparent 50%, red 50%);
+      
+      /* 设置背景图的尺寸为：宽度 100%（铺满元素），高度仅为 1px */
+      background-size: 100% 1px;
+      background-repeat: no-repeat;
+      background-position: top center;
+      /* 移除默认的 border-top，避免和渐变重复 */
+      border-top: none;
+      
+      /* 添加 1px 顶部内边距，为那条背景模拟线提供显示空间（占位） */
+      padding-top: 1px;
+    }
+  }
+  
+  @media only screen and (-webkit-min-device-pixel-ratio: 3),
+    only screen and (min-resolution: 288dpi) {
+    .box {
+      background-image: linear-gradient(to top, transparent 66.66%, red 66.66%);
       background-size: 100% 1px;
       background-repeat: no-repeat;
       background-position: top center;
@@ -618,7 +637,162 @@ if (window.devicePixelRatio && window.devicePixelRatio > 1) {
   }
   ```
   
-  ![image-20250508195926265](images/image-20250508195926265.png)
+  
+  
+- **使用伪元素 + 缩放**
+
+  ```css
+  .box {
+    width: 50px;
+    height: 50px;
+    background: #ccc;
+    border-top: 1px solid red;
+  }
+  
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (min-resolution: 192dpi) {
+    .box {
+      /* 设置元素为相对定位作为伪元素定位的基准 */
+      position: relative;
+      
+      /* 隐藏原本的边框 */
+      border-top: none;
+      
+      /* 添加 1px 顶部内边距，为定位的伪元素边框占位 */
+      padding-top: 1px;
+    }
+  
+    .box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      /* 因为进行 0.5 倍缩放，所以宽度会缩小一半，故使用 200% 宽度 */
+      width: 200%;
+      border-top: 1px solid red;
+      
+      /* 对 1px 边框进行 0.5 倍缩放 */
+      transform: scale(0.5);
+      transform-origin: 0 0;
+      box-sizing: border-box;
+    }
+  }
+  
+  @media only screen and (-webkit-min-device-pixel-ratio: 3),
+    only screen and (min-resolution: 288dpi) {
+    .box {
+      position: relative;
+      border-top: none;
+      padding-top: 1px;
+    }
+  
+    .box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 300%;
+      border-top: 1px solid red;
+      transform: scale(0.33);
+      transform-origin: 0 0;
+      box-sizing: border-box;
+    }
+  }
+  ```
+
+  
+
+- **使用图片实现（base64）**
+
+  1. 首先使用 Photoshop 等图片绘制工具，制作一张 `1 X 2` 像素大小的图片，并设置边框颜色。
+
+     ![image-20250509080618218](images/image-20250509080618218.png)
+
+     
+
+  2. 导出为 PNG 图片并转换为 Base64 编码
+
+     ```
+     data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACAQMAAACjTyRkAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAAZQTFRF/wAAAAAAQaMSAwAAAAJ0Uk5T/wDltzBKAAAADElEQVR4nGNkYGwAAACKAIOERterAAAAAElFTkSuQmCC
+     ```
+
+     **⚠️ 注意：** 这里使用 Base64 编码确实是为了避免浏览器额外的网络请求，从而提升加载性能。
+
+     
+
+  3. 使用如下方式使用图片
+
+     ```css
+     .box {
+       width: 50px;
+       height: 50px;
+       background: #ccc;
+       border-top: 1px solid red;
+     }
+     
+     @media only screen and (-webkit-min-device-pixel-ratio: 2),
+       only screen and (min-resolution: 192dpi) {
+       .box {
+         /* 添加 1px 顶部内边距，为背景图片边框占位 */
+         padding-top: 1px;
+         
+         /* 隐藏原本的边框 */
+         border-top: none;
+         background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACAQMAAACjTyRkAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAAZQTFRF/wAAAAAAQaMSAwAAAAJ0Uk5T/wDltzBKAAAADElEQVR4nGNkYGwAAACKAIOERterAAAAAElFTkSuQmCC);
+         background-position: 0 0;
+         
+         /* 设置背景图片 X 轴方向平铺 */
+         background-repeat: repeat-x;
+         
+         /* 背景图片的显示尺寸缩放为 宽 1 像素、高 1 像素 */
+         background-size: 1px 1px;
+       }
+     }
+     ```
+
+     **⚠️ 注意：** 这种方法**无法动态修改边框的颜色**，不推荐使用。
+
+     
+
+- **使用 SVG 实现**
+
+  ```css
+  .box {
+    width: 50px;
+    height: 50px;
+    background: #ccc;
+    border-top: 1px solid red;
+  }
+  
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (min-resolution: 192dpi) {
+    .box {
+      /* 隐藏原本的边框 */
+      border-top: none;
+      
+      /* 使用 url 引用 SVG，并设置 SVG 的高度为 0.5，并且 y 轴设置为 0.5 居中对齐*/
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='1'%3E%3Crect fill='red' x='0' y='0.5' width='100%25' height='0.5'/%3E%3C/svg%3E");
+      background-position: 0 0;
+      background-repeat: no-repeat;
+    }
+  }
+  
+  @media only screen and (-webkit-min-device-pixel-ratio: 3),
+    only screen and (min-resolution: 288dpi) {
+    .box {
+      border-top: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='1'%3E%3Crect fill='red' x='0' y='0.67' width='100%25' height='0.33'/%3E%3C/svg%3E");
+      background-position: 0 0;
+      background-repeat: no-repeat;
+    }
+  }
+  ```
+
+  **⚠️ 注意：** 在 `background-image: url()` 中使用**未经编码的 SVG 字符串**很容易出错导致没效果，建议转码后使用。
+
+上述四种方法最终效果如下：
+
+![image-20250509073952493](images/image-20250509073952493.png)
 
 
 
@@ -658,3 +832,26 @@ if (window.devicePixelRatio && window.devicePixelRatio > 1) {
 
    - [postcss-pxtorem](https://github.com/cuth/postcss-pxtorem) 插件：会自动将 CSS 文件中的转换为 `px` 单位转换为 `rem` 单位
    - [postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport) 插件：会自动将 CSS 文件中的转换为 `px` 单位转换为 `vw` 单位
+
+
+
+## 总结
+
+- **移动端适配的目标：** 让网页在不同尺寸和分辨率的移动设备上，都能保持一致且良好的展示效果
+- **基础概念：**
+  - **设备独立像素（DIP）：** CSS 中的逻辑像素
+  - **物理像素：** 设备硬件上的真实像素点
+  - **设备像素比（DPR）：** 物理像素与逻辑像素的比值
+  - **像素密度（PPI）：** 每英寸所包含的像素点数，决定显示清晰度
+  - **视口（Viewport）：** 分为布局视口、视觉视口、理想视口，用于控制页面渲染与显示
+- **适配方案详解**
+  - **百分比布局：** 按设计稿的比例换算为 `%`，但存在兼容性问题
+  - **rem 方案：** 通过设置 `html` 的 `font-size` 实现相对单位适配（如 flexible.js）
+  - **vw 方案：** 使用视口宽度单位 (`vw`) 实现自适应布局，**推荐替代 rem**
+  - **meta viewport 设置：** 设定 `width=device-width` 是实现理想视口适配的关键
+- **资源适配优化：** 优先推荐使用系统字体，并且不无脑统一使用多倍图，而是根据 DPR 动态加载图片
+- **1px 问题：** 通过以下四种方案解决高 DPR 屏幕下的 `1px` 边框线的显示问题
+  - 渐变实现
+  - 使用缩放实现
+  - 使用图片实现
+  - 使用 SVG 实现

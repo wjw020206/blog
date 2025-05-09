@@ -712,7 +712,7 @@ if (window.devicePixelRatio && window.devicePixelRatio > 1) {
      data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACAQMAAACjTyRkAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAAZQTFRF/wAAAAAAQaMSAwAAAAJ0Uk5T/wDltzBKAAAADElEQVR4nGNkYGwAAACKAIOERterAAAAAElFTkSuQmCC
      ```
 
-     **⚠️ 注意：** 这里使用 Base64 编码确实是为了避免浏览器额外的网络请求，从而提升加载性能。
+     **⚠️ 注意：** 这里使用 Base64 编码是为了避免浏览器额外的网络请求，从而提升加载性能。
 
      
 

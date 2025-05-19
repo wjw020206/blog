@@ -656,5 +656,106 @@ Grid 布局原生支持等高列，**推荐使用**，具体实现代码与三�
 
 
 
+## 粘连布局
 
+**粘连布局（Sticky Footer Layout）**目的是确保页面底部的元素（通常是 `<footer>`）在以下两种情况下都能合理显示：
+
+- 当页面内容较少时，页脚“粘附”在视口底部，避免悬空
+- 当页面内容较多时，页脚自然地出现在内容区域之后，随内容推至页面底部
+
+**使用场景：** 如官网版权信息固定在底部、任何希望**页脚始终贴近屏幕底部**的场景等。
+
+![image-20250519074255426](images/image-20250519074255426.png)
+
+
+
+### 负 margin 实现
+
+在过去没有 Flex 和 Grid，我们可以使用如下步骤来实现粘连布局。
+
+1. 首先确定页面结构，并设置基础样式
+
+   ```html
+   <div class="wrapper">
+     <div class="main">
+       文本 <br />
+       文本 <br />
+       文本 <br />
+     </div>
+   </div>
+   <div class="footer">footer</div>
+   ```
+
+   ```css
+   body {
+     margin: 0;
+     background: #f3f3f3;
+     padding: 16px;
+   }
+   
+   .footer,
+   .main {
+     font-size: 20px;
+     color: #fff;
+   }
+   
+   .main {
+     background: #999;
+   }
+   
+   .footer {
+     /* 设置底部区域的高度 */
+     height: 50px;
+     line-height: 50px;
+     text-align: center;
+     background: #999;
+   }
+   ```
+
+   ![image-20250519082442461](images/image-20250519082442461.png)
+
+   **⚠️ 注意：** 这一步需要确保 `footer` 区域是独立的，**与 `wrapper` 没有任何嵌套关系**。
+
+   
+
+2. 为 `wrapper` 区域设置 `min-height: 100%`，高度与视口高度相同
+
+   ```css
+   .wrapper {
+     min-height: 100%;
+   }
+   ```
+
+   ![image-20250519082659572](images/image-20250519082659572.png)
+
+   
+
+3. 为 `footer` 区域**设置负的 `margin-top`，值与自身高度相同**
+
+   ```css
+   .footer {
+     /* 与底部区域高度相同，不过是负值 */
+   	margin-top: -50px;
+   }
+   ```
+
+   ![image-20250519082955046](images/image-20250519082955046.png)
+
+   
+
+4. 到前面一步为止就已经实现了基本的粘连效果，**但是存在一个问题，当 `main` 区域的内容增加，导致高度变大的时候，内容会与底部区域重叠**
+
+   ![image-20250519083337320](images/image-20250519083337320.png)
+
+   这时我们只需要给 `main` 区域增加一个底部内边距，内边距的大小跟 `footer` 区域高度相同即可解决这个问题
+
+   ```css
+   .main {
+     padding-bottom: 50px;
+   }
+   ```
+
+   
+
+   
 

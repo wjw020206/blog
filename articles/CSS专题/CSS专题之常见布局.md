@@ -778,3 +778,61 @@ Grid 布局原生支持等高列，**推荐使用**，具体实现代码与三�
 
 ### Flex 实现
 
+```html
+<div class="container">
+  <div class="main">
+    <div class="inner">
+      文本 <br />
+      文本 <br />
+      文本 <br />
+    </div>
+  </div>
+  <div class="footer">footer</div>
+</div>
+```
+
+```css
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1; /* 主体区域填满剩余空间 */
+  margin-bottom: 16px; /* 与 footer 之间的间距 */
+}
+
+.footer {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+
+/* ...其它样式 */
+```
+
+[在线预览效果](https://codepen.io/wjw020206/pen/JooqLEO)
+
+
+
+### Grid 实现
+
+```css
+.container {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  height: 100%;
+  gap: 16px; /* 与 footer 之间的间距 */
+}
+
+.footer {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+
+/* ...其它样式 */
+```
+
+[在线预览效果](https://codepen.io/wjw020206/pen/jEEozmb)

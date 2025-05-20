@@ -55,7 +55,7 @@
 
 ### 一栏布局（通栏）
 
-`header`、`footer` 区域宽度设置为 `100%`，也可以不设置宽度，因为这两个区域都是块级元素，默认在·会占满整个视口宽度。不过 `header`、`footer` 区域中的内容区域的宽度要和 `content` 区域的宽度保持一致。
+`header`、`footer` 区域宽度设置为 `100%`，也可以不设置宽度，因为这两个区域都是块级元素，默认会占满整个视口宽度。不过 `header`、`footer` 区域中的内容区域的宽度要和 `content` 区域的宽度保持一致。
 
 **使用场景：** 如企业官网等。
 
@@ -240,7 +240,7 @@ Grid 实现方式相比 Flex 方式代码更加简洁。
 
 这样布局的效果是没有什么问题，但如果我们希望 `main` 区域的内容优先加载出来，就需要进行布局优化。
 
-**浏览器的渲染引擎在构建和渲染渲染树是异步的（谁先构建好谁先显示）**，所以我们只需要将 `main` 区域放到提前的位置就可以优先渲染。
+**浏览器的渲染引擎在构建和渲染树是异步的（谁先构建好谁先显示）**，所以我们只需要将 `main` 区域放到提前的位置就可以优先渲染。
 
 ```html
 <div class="container">
@@ -836,3 +836,183 @@ Grid 布局原生支持等高列，**推荐使用**，具体实现代码与三�
 ```
 
 [在线预览效果](https://codepen.io/wjw020206/pen/jEEozmb)
+
+
+
+## 瀑布流布局
+
+**瀑布流布局（Masonry Layout）**通常都是多列排布，高度不一但是紧凑排列。
+
+**使用场景：** 如图片墙、商品展示页等，瀑布流具体的例子可以参考[小红书](https://www.xiaohongshu.com/)、[花瓣网](https://huaban.com)。
+
+![image-20250520082220839](images/image-20250520082220839.png)
+
+
+
+### JavaScript 实现
+
+**该方案是最早期也是兼容性最好的瀑布流方案**，它的主要原理是**在页面加载或者窗口大小变化时，通过 JavaScript 动态计算每个 item 元素的位置，手动设置其 `top` 和 `left` 或使用 `transform`**。
+
+因为涉及 JavaScript，本篇文章主要讲解的是 CSS 相关的布局，具体的就不在此赘述了，感兴趣的可以看 @討厭吃香菜 前辈的[这篇文章](https://juejin.cn/post/7322655035699396660)。
+
+**⚠️ 注意：** 通常还需要后台返回图片的尺寸信息（宽高）。
+
+
+
+### 砌体布局实现
+
+```html
+<div class="container">
+  <img src="https://dummyimage.com/300x400/999/fff" />
+  <img src="https://dummyimage.com/300x200/999/fff" />
+  <img src="https://dummyimage.com/300x500/999/fff" />
+  <img src="https://dummyimage.com/300x300/999/fff" />
+  <img src="https://dummyimage.com/300x250/999/fff" />
+  <img src="https://dummyimage.com/300x450/999/fff" />
+  <img src="https://dummyimage.com/300x350/999/fff" />
+  <img src="https://dummyimage.com/300x150/999/fff" />
+  <img src="https://dummyimage.com/300x380/999/fff" />
+  <img src="https://dummyimage.com/300x420/999/fff" />
+</div>
+```
+
+```css
+.container {
+  columns: 300px;
+  /* 设置列之间的间距 */
+  column-gap: 16px;
+}
+
+.container img {
+  width: 100%;
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* ...其它样式 */
+```
+
+`columns: 300px;` 用来设置列的宽度为 `300px`，浏览器会**自动根据容器宽度**计算能放下多少列，比如容器宽度为 `960px` 时，`300px + 16px（间距）` 可放 3 列，剩余宽度自动分配。
+
+[在线预览效果](https://codepen.io/wjw020206/pen/MYYdGwO)
+
+**⚠️ 注意：** 
+
+- 该方案兼容 IE9+ 以上的浏览器
+- 内容的排列顺序是由浏览器自动控制的，**无法精确指定内容在哪一列显示**，如果需要控制显示顺序，建议使用 JavaScript 实现的方案
+- 当内容很多时，会导致布局和渲染计算不断进行，使得网站卡顿，性能不佳，需要通过分页或者延迟加载。
+
+
+
+### Grid + JavaScript 实现
+
+```html
+<div class="container" id="grid">
+  <div class="item">
+    <img src="https://dummyimage.com/300x400/999/fff" />
+  </div>
+  <div class="item">
+    <img src="https://dummyimage.com/300x200/999/fff" />
+  </div>
+  <div class="item">
+    <img src="https://dummyimage.com/300x500/999/fff" />
+  </div>
+  <div class="item">
+    <img src="https://dummyimage.com/300x300/999/fff" />
+  </div>
+  <div class="item">
+    <img src="https://dummyimage.com/300x250/999/fff" />
+  </div>
+  <div class="item">
+    <img src="https://dummyimage.com/300x450/999/fff" />
+  </div>
+  <div class="item">
+    <img src="https://dummyimage.com/300x350/999/fff" />
+  </div>
+  <div class="item">
+    <img src="https://dummyimage.com/300x150/999/fff" />
+  </div>
+  <div class="item">
+    <img src="https://dummyimage.com/300x380/999/fff" />
+  </div>
+  <div class="item">
+    <img src="https://dummyimage.com/300x420/999/fff" />
+  </div>
+</div>
+```
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: 10px; /* 关键基准行高 */
+  gap: 16px;
+}
+
+.item {
+  overflow: hidden;
+}
+
+.item img {
+  width: 100%;
+  display: block;
+}
+
+/* ...其它样式 */
+```
+
+```js
+function resizeGridItems() {
+  const grid = document.getElementById('grid');
+
+  const rowHeight = parseInt(
+    window.getComputedStyle(grid).getPropertyValue('grid-auto-rows')
+  );
+
+  const rowGap = parseInt(
+    window.getComputedStyle(grid).getPropertyValue('gap')
+  );
+
+  grid.querySelectorAll('.item').forEach((item) => {
+    const contentHeight = item
+    .querySelector('img')
+    .getBoundingClientRect().height;
+
+    // 计算跨几行
+    const rowSpan = Math.ceil(
+      (contentHeight + rowGap) / (rowHeight + rowGap)
+    );
+
+    item.style.gridRowEnd = `span ${rowSpan}`;
+  });
+}
+
+// 等待图片加载完毕再计算高度
+window.addEventListener('load', resizeGridItems);
+window.addEventListener('resize', resizeGridItems);
+```
+
+该方案需要结合 JavaScript 动态计算元素跨几行，HTML 元素的排列顺序是你自己写的顺序，**不会被浏览器自动打乱**（不像砌体布局那样）。
+
+[在线预览效果](https://codepen.io/wjw020206/pen/EaazLmO)
+
+
+
+## 总结
+
+- CSS 有如下常见布局：
+
+  - 单列布局
+
+  - 两列布局
+
+  - 三列布局
+
+  - 等高列布局
+
+  - 粘连布局
+
+  - 瀑布流布局
+
+- 每种布局都有多种实现方案，每种方案都有自己的优缺点，可以根据需要选择使用
+

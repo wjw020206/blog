@@ -201,12 +201,11 @@ CSS 变量的声明由 `--` 开头，便于浏览器区分**自定义属性**和
   ```css
   :root {
     --color: red;
-    --color: var(--red); /* 无效 */
+    --color: var(--color); /* 循环引用 */
   }
   
   .box {
-    /* 降级为 initial，在 Chrome 浏览器中等同于 color: #000; */
-    color: var(--color); 
+    color: var(--color); /* 无效，Chrome 会降级为初始值  */
   }
   ```
 

@@ -61,7 +61,7 @@ Flex 布局是我们平常开发页面中用的最多的布局，而其中最常
 
 - **`flex` 属性：** 是三个属性的简写形式
 
-  ```css
+  ```
   flex: <flex-grow> <flex-shrink> <flex-basis>;
   ```
 

@@ -240,3 +240,4 @@ Flex 布局是我们平常开发页面中用的最多的布局，而其中最常
 - [CSS Box Sizing Module Level 3](https://www.w3.org/TR/css-sizing-3/#valdef-width-auto)
 - [CSS 弹性框布局模块 1 级 --- CSS Flexible Box Layout Module Level 1](https://www.w3.org/TR/css-flexbox-1/#min-size-auto)
 - [CSS Flexible Box Layout Module Level 1](https://www.w3.org/TR/css-flexbox-1/#flex-common)
+- [《深入解析CSS》Keith J.Grant 5 章节](https://book.douban.com/subject/35021471/)

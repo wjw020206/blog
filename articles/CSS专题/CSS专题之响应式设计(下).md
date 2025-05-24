@@ -493,7 +493,7 @@ font-family: Blanco, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Rob
 5. **Segoe UI**：Windows 和 Windows Phone 上的系统默认字体
 6. **Roboto**：Android 及部分新版 Chrome OS 的系统默认字体
 7. **Helvetica**：低版本浏览器中的通用无衬线字体替代方案
-8. **Arial **：低版本浏览器中的通用无衬线字体替代方案
+8. **Arial**：低版本浏览器中的通用无衬线字体替代方案
 9. **sans-serif**：最终兜底字体，确保至少使用无衬线风格
 10. **Apple Color Emoji**：macOS/iOS 上的原生彩色 emoji 字体
 11. **Segoe UI Emoji**：Windows 上的 emoji 字体
@@ -822,8 +822,8 @@ if (window.devicePixelRatio && window.devicePixelRatio > 1) {
 
 3.  **使用 PostCSS 插件（推荐）**
 
-   - [postcss-pxtorem](https://github.com/cuth/postcss-pxtorem) 插件：会自动将 CSS 文件中的转换为 `px` 单位转换为 `rem` 单位
-   - [postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport) 插件：会自动将 CSS 文件中的转换为 `px` 单位转换为 `vw` 单位
+   - [postcss-pxtorem](https://github.com/cuth/postcss-pxtorem) 插件：会自动将 CSS 文件中的 `px` 单位转换为 `rem` 单位
+   - [postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport) 插件：会自动将 CSS 文件中的 `px` 单位转换为 `vw` 单位
 
 
 

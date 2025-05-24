@@ -157,16 +157,17 @@ Flex 布局是我们平常开发页面中用的最多的布局，而其中最常
 
 
 
-那什么是 `minimum content size` ？[CSS 规范]([CSS 弹性框布局模块 1 级 --- CSS Flexible Box Layout Module Level 1](https://www.w3.org/TR/css-flexbox-1/#min-size-auto))对此也有进行说明：
+那什么是 `minimum content size` ？[CSS 规范](https://www.w3.org/TR/css-flexbox-1/#min-size-auto) 对此也有进行说明：
 
 ![image-20250524122552686](images/image-20250524122552686.png)
 
 简单来说，**`minimum content size`（最小内容尺寸） 是指元素为了完整显示其内容所需的最小宽度或高度**，在不同情况下对应不同的值：
 
 - **当元素是普通 Flex 弹性子元素（不是 scroll 容器）**
-- 它的 `min-width` 默认为 `auto`，意味着使用**内容为基础的最小尺寸（content-based minimum size）**
-  
-- 也就是元素**默认不会被压缩到小于内容的尺寸**
+  - 它的 `min-width` 默认为 `auto`，意味着使用**内容为基础的最小尺寸（content-based minimum size）**
+
+  - 也就是元素**默认不会被压缩到小于内容的尺寸**
+
 - **当元素是 scroll 容器（`overflow` 属性值为 `scroll` 或 `auto`）**
   - `min-width: auto` 计算结果为 `0`
   - 表示**可以无限收缩，不被内容撑开**

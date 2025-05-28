@@ -98,3 +98,65 @@
   **⚠️ 注意：** 在早期版本的 Firefox 和 IE 浏览器中，使用 `position: fixed` 也需要显式设置 `z-index` 为非 `auto` 值才能触发层叠上下文的创建，但在现代浏览器中，**`position: fixed` 本身就能自动创建层叠上下文**，即使没有设置 `z-index`，这时元素的层叠等级在 “层叠顺序图” 的 `z-index:0/auto` 一级。
 
   ![image-20250528090127942](images/image-20250528090127942.png)
+  
+- **`z-index` 值不为 `auto` 的 `flex` 子元素**（父元素的 `display` 属性值为 `flex` 或者 `inline-flex` 的元素）
+
+- 元素的 `opacity` 值不为 `1`
+
+- 元素的 `transform` 值不为 `none`
+
+- 元素的 `mix-blend-mode` 值不为 `normal`
+
+- 元素的 `filter` 值不为 `none`
+
+- 元素的 `isolation` 值不为 `isolate`
+
+- 元素的 `will-change` 值为前面提到的任意一个属性（例如：`will-change: opacity;`）
+
+- 元素的 `-webkit-overflow-scrolling` 值为 `touch`
+
+
+
+## 案例演示
+
+正所谓实践出真知，接下来我们通过几个典型案例，来验证和巩固前面讲到的层叠上下文知识。
+
+
+
+### 不同层叠上下文
+
+```css
+.box {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.item {
+  position: absolute;
+  font-size: 20px;
+  width: 100px;
+  height: 100px;
+  color: #fff;
+}
+
+.a {
+  background-color: blue;
+  z-index: 1;
+}
+
+.b {
+  background-color: green;
+  z-index: 2;
+  top: 20px;
+  left: 20px;
+}
+
+.c {
+  background-color: red;
+  z-index: 3;
+  top: -20px;
+  left: 40px;
+}
+```
+

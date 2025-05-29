@@ -123,40 +123,111 @@
 
 
 
-### 不同层叠上下文
+### 案例 1
 
 ```css
 .box {
   position: relative;
-  width: 100px;
-  height: 100px;
-}
-
-.item {
-  position: absolute;
-  font-size: 20px;
-  width: 100px;
-  height: 100px;
-  color: #fff;
 }
 
 .a {
+  position: absolute;
   background-color: blue;
   z-index: 1;
 }
 
 .b {
+  position: absolute;
   background-color: green;
   z-index: 2;
-  top: 20px;
-  left: 20px;
 }
 
 .c {
+  position: absolute;
   background-color: red;
   z-index: 3;
-  top: -20px;
-  left: 40px;
 }
+
+/* 其它样式... */
 ```
 
+```html
+<div class="box">
+  <div class="item a">a</div>
+  <div class="item b">b</div>
+</div>
+<div class="box">
+  <div class="item c">c</div>
+</div>
+```
+
+![image-20250529074117642](images/image-20250529074117642.png)
+
+[在线预览效果](https://codepen.io/wjw020206/pen/EajjpxR)
+
+上面这段代码中大家可以先想一下 `a`、`b`、`c` 元素它们的层叠上下文分别是由哪个元素创建的？
+
+
+
+**答案是：**
+
+- `a`、`b`、`c` 三个元素的父元素 `.box` 虽然设置了 `position: relative;`，但没有设置 `z-index`，所以不会产生层叠上下文，所以三个元素就都处于 `<html>` 标签产生的 **“根层叠上下文”** 中
+- 所以在同一层叠上下文中 `c` 元素的 `z-index` 值最大，自然就出现在最前面
+
+
+
+### 案例 2
+
+```css
+.box1 {
+  position: relative;
+  z-index: 2;
+}
+
+.box2 {
+  position: relative;
+  z-index: 1;
+}
+
+.a {
+  position: absolute;
+  background-color: blue;
+  z-index: 1;
+}
+.b {
+  position: absolute;
+  background-color: green;
+  z-index: 2;
+}
+.c {
+  position: absolute;
+  background-color: red;
+  z-index: 3;
+}
+
+/* 其它样式... */
+```
+
+```html
+<div class="box1">
+  <div class="item a">a</div>
+  <div class="item b">b</div>
+</div>
+<div class="box2">
+  <div class="item c">c</div>
+</div>
+```
+
+![image-20250529080003130](images/image-20250529080003130.png)
+
+[在线预览效果](https://codepen.io/wjw020206/pen/vEOOaGB)
+
+上述代码的主要结构跟案例 1 类似，只是对 `a`、`b`、`c` 三个元素的父元素增加了 `z-index`，使之产生层叠上下文。
+
+大家可以想一下，为什么明明 `c` 元素的 `z-index` 值最大，却被比它小的 `a`、`b` 元素给盖住？
+
+
+
+**答案是：**
+
+- **其中 `a`、`b` 元素在同一个层叠上下文中，而 `c` 元素单独在一个层叠上下文中**。

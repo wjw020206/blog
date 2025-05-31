@@ -128,7 +128,7 @@
 
 
 
-### absolute + calc()
+### absolute + calc
 
 ```css
 .container {
@@ -144,14 +144,14 @@
 }
 ```
 
-该方案与**前面的 absolute + 负 margin 方案**原理相同，使用了 `calc()` 函数替代了 `margin` 负值来计算居中的位置。
+该方案与**前面的 absolute + 负 margin 方案**原理相同，使用了 `calc` 函数替代了 `margin` 负值来计算居中的位置。
 
 [在线查看效果](https://codepen.io/wjw020206/pen/pvJgZyb)
 
 **⚠️ 缺点：**
 
-- 该方案依赖 `calc()` 函数的兼容性，具体兼容性可以参考 [Can I use](https://caniuse.com/calc)
--  需要提前知道元素大小，修改元素大小**需要同步修改 `calc()` 函数中减去的值**
+- 该方案依赖 `calc` 函数的兼容性，具体兼容性可以参考 [Can I use](https://caniuse.com/calc)
+-  需要提前知道元素大小，修改元素大小**需要同步修改 `calc` 函数中减去的值**
 - 相比前两个方案，该方案既缺乏兼容性（IE9+），又需要手动计算元素大小的一半，**不推荐使用**
 
 
@@ -186,3 +186,44 @@
 **✅ 优点：** 无需提前知道元素大小，修改元素大小**不需要同步修改相关的值**
 
 **⚠️ 缺点：** 该方案依赖 `transform()` 函数的兼容性，具体兼容性可以参考 [Can I use](https://caniuse.com/transforms2d)
+
+
+
+### line-height
+
+```css
+.container {
+  /* 其它的基础样式... */
+  line-height: 300px;
+  text-align: center;
+}
+
+.box {
+  /* 其它的基础样式... */
+  display: inline-block;
+  vertical-align: middle;
+  line-height: initial;
+}
+```
+
+该方案的实现步骤如下：
+
+1. 首先给 `.container` 容器设置一个与高度相同的行高，例如这里容器的高度为 `300px`，所以设置 `line-height: 300px`，并给容器设置 `text-align: center;` 水平居中对齐
+
+   ![image-20250531190730502](images/image-20250531190730502.png)
+
+2. 然后再给 `.box` 元素设置为**行内块（inline-block）元素**，并设置 `vertical-align: middle;` 垂直居中对齐
+
+   ![image-20250531190841076](images/image-20250531190841076.png)
+
+3. 居中效果有了，但是文字却不见了，因为 `.container` 容器的 **`text-align` 和 `line-height` 默认是会被继承给 `.box` 元素**，这时我们需要通过 `line-height: initial` 和 `text-align: initial` 重置为初始值
+
+   ![image-20250531191005471](images/image-20250531191005471.png)
+
+   
+
+[在线查看效果](https://codepen.io/wjw020206/pen/QwbyBXg)
+
+**✅ 优点：** 无需提前知道元素大小，修改元素大小**不需要同步修改相关的值**
+
+**⚠️ 缺点：** 需要**重置**内部元素的文字样式

@@ -220,10 +220,117 @@
 
    ![image-20250531191005471](images/image-20250531191005471.png)
 
-   
-
 [在线查看效果](https://codepen.io/wjw020206/pen/QwbyBXg)
 
 **✅ 优点：** 无需提前知道元素大小，修改元素大小**不需要同步修改相关的值**
 
 **⚠️ 缺点：** 需要**重置**内部元素的文字样式
+
+
+
+### writing-mode
+
+```css
+.container {
+  /* 其它的基础样式... */
+  writing-mode: vertical-lr;
+  text-align: center;
+}
+
+.inner {
+  width: 100%;
+  display: inline-block;
+  writing-mode: horizontal-tb;
+}
+
+.box {
+  /* 其它的基础样式... */
+  display: inline-block;
+  text-align: initial;
+}
+```
+
+```html
+<div class="container">
+  <div class="inner">
+    <div class="box">你好，世界</div>
+  </div>
+</div>
+```
+
+该方案主要利用 `writing-mode` 属性，`writing-mode` 属性可以改变文字的显示方向
+
+- `writing-mode: vertical-lr` 让元素文字垂直方向显示
+- `writing-mode: horizontal-tb` 让元素文字水平方向显示
+
+该方案实现的步骤如下：
+
+1. 首先将 `.container` 容器的**文字显示方向调整为垂直方向**，并设置文字水平居中对齐，用来实现**垂直居中**
+
+   ![image-20250531194604625](images/image-20250531194604625.png)
+
+2. 添加一个 `.inner` 包装元素，设置为**行内块（inline-block）元素**，并将宽度设置为 `100%`，并设置**文字显示方向为水平方向**，此时 `.container` 容器的 `text-align: center;` 被继承，变成了**水平居中**
+
+   ![image-20250531194830150](images/image-20250531194830150.png)
+
+3. 最后将 `.inner` 包装元素内部的 `.box` 元素调整为**行内块（inline-block）元素**，并重置继承的 `text-align` 属性的值为初始值
+
+   ![image-20250531195415919](images/image-20250531195415919.png)
+
+
+[在线查看效果](https://codepen.io/wjw020206/pen/ByNjvLW)
+
+**✅ 优点：** 
+
+- 兼容性好，适用于 IE 等老版本浏览器
+- 无需提前知道元素大小，修改元素大小**不需要同步修改相关的值**
+
+**⚠️ 缺点：** 
+
+- 需要**重置**内部元素的文字样式
+- 实现和理解起来有点复杂
+- 需要额外的 DOM 元素
+
+
+
+### table
+
+```css
+.container {
+  /* 其它的基础样式... */
+  text-align: center;
+}
+
+.box {
+  /* 其它的基础样式... */
+  display: inline-block;
+  text-align: initial;
+}
+```
+
+```html
+<table>
+  <tbody>
+    <tr>
+      <td class="container">
+        <div class="box">你好，世界</div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+```
+
+该方案利用了 `<table>` 标签中 `<td>` 单元格内容然是垂直居中的特性，所以只需要再添加一个水平居中就可以实现水平垂直居中。
+
+[在线查看效果](https://codepen.io/wjw020206/pen/xbGZmJK)
+
+**✅ 优点：** 
+
+- 兼容性好，适用于 IE 等老版本浏览器
+- 无需提前知道元素大小，修改元素大小**不需要同步修改相关的值**
+
+**⚠️ 缺点：** 
+
+- 代码冗余，需要额外的 DOM 元素
+- 不符合 `<table>` 标签正确语义用法
+- 需要**重置**内部元素的文字水平居中样式
